@@ -15,4 +15,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build: {
+    outDir: 'dist', // Carpeta que Netlify usará para publicar
+  },
+  base: '/', // Si lo vas a subir a un subdirectorio, cambia por '/nombre/'
 })
