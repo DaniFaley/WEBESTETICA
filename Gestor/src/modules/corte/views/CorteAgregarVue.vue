@@ -95,7 +95,7 @@
   // Obtener categorías desde el backend al montar el componente
   const fetchSexo = async () => {
       try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/sexo/`);
+          const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/sexo/`);
           sexos.value = response.data; // Guardar categorías en la variable reactiva
       } catch (error) {
           console.error('Error al obtener las categorías:', error);
@@ -111,7 +111,7 @@
   // Obtener categorías desde el backend al montar el componente
   const fetchServicio = async () => {
       try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicio/`);
+          const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/servicio/`);
           servicios.value = response.data; // Guardar categorías en la variable reactiva
       } catch (error) {
           console.error('Error al obtener las categorías:', error);

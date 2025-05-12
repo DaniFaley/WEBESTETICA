@@ -62,7 +62,7 @@
   // Obtener sexos
   const obtenerSexo = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/sexo/`);
+      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/sexo/`);
       response.data.forEach((sexo: any) => {
         sexos.value[sexo.id_sexo] = sexo.nombre;
       });
@@ -75,7 +75,7 @@
   // Obtener servicios
   const obtenerServicio = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicio/`);
+      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/servicio/`);
       response.data.forEach((servicio: any) => {
         servicios.value[servicio.id_servicio] = servicio.nombre;
       });
@@ -88,7 +88,7 @@
   // Obtener el único usuario registrado
   const obtenerUsuario = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/usuario/`);
+      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/usuario/`);
       return response.data[0]; // asumimos que hay un solo usuario
     } catch (error) {
       console.error("Error al obtener el usuario:", error);

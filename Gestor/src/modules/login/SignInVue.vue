@@ -56,7 +56,7 @@ const router = useRouter()
 
 const login = async () => {
   try {
-    const { data } = await axios.post('http://localhost:3001/api/Auth/login/', {
+    const { data } = await axios.post('https://apiestetica-production-5f1e.up.railway.app/api/Auth/login/', {
       correo: correo.value,
       contrasena: contrasena.value,
     })

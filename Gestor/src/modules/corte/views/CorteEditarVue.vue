@@ -96,7 +96,7 @@
   // Función para obtener sexos del backend
   const fetchSexo = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/sexo/`);
+      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/sexo/`);
       sexos.value = response.data;
     } catch (error) {
       console.error('Error al obtener las sexos:', error);
@@ -113,7 +113,7 @@
   // Función para obtener servicios del backend
   const fetchServicio = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/servicio/`);
+      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/servicio/`);
       servicios.value = response.data;
     } catch (error) {
       console.error('Error al obtener las servicios:', error);

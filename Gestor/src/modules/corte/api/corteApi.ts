@@ -5,7 +5,7 @@ const corteApi = axios.create({
 });
 */
 const corteApi = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/corte`
+  baseURL: `https://apiestetica-production-5f1e.up.railway.app/api/corte`
 });
 
 export default corteApi;
