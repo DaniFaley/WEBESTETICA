@@ -1,0 +1,245 @@
+/* Estilos: Vista general de registros de corte*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-color: none;
+  outline-color: none;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Opcional: establece una base de fuente y color */
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+/*Titulo de pagina*/
+.h3_Titulo {
+  box-sizing: border-box;
+  color: #42A5F5;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+/*Contenedor de botones superiores*/
+.contenedor_section_botones {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.contenedor_boton_hijo {
+  width: 96%;
+  display: flex;
+  justify-content: space-between; /* 🟢 Esto distribuye izquierda y derecha */
+  align-items: center;
+}
+.contenedor_boton_hijo--usuario {
+  width: 96%;
+  display: flex;
+  justify-content: center; /* 🟢 Esto distribuye izquierda y derecha */
+  align-items: center;
+}
+/*Contenedor de boton de agregar registro*/
+.contenedor_boton_add {
+
+}
+.contenedor_boton_filtros {
+  display: flex;
+  gap: 10px;
+
+}
+/*Boton*/
+.boton_accion {
+  box-sizing: border-box;
+  display: flex;
+  background-color: #90caf9;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #64b5f6;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2rem;
+}
+.boton_accion:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #64b5f6;
+}
+/*Boton agregar registro*/
+.boton_agregar {
+  background-color: #2196F3;
+  box-shadow: 0px 5px 0px 0px #1E88E5;
+}
+.boton_agregar:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #1E88E5;
+}
+/*Boton filtro de fecha*/
+.boton_fecha {
+  font-size: 14px;
+  font-weight: bold;
+  color: #f8f9fa;
+  width: 10rem;
+  text-align: center;
+  padding: 10px;
+}
+/*Iconos de botones*/
+.icon {
+  color: #f8f9fa;
+  font-size: 1.3rem;
+}
+/*Contenedor de cards (Registros)*/
+.contenedor_section_tabla {
+  box-sizing: border-box;
+  display: grid; /* Cambiamos de flexbox a grid */
+  padding: 10px;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(1fr, 1fr)
+  ); /* Ajusta el número de columnas */
+  height: 100%;
+  row-gap: 14px;
+  column-gap: 14px;
+  margin-bottom: 20px;
+}
+/*Card*/
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 0.9rem;
+  box-sizing: border-box;
+  background-color: #64B5F6;
+  border-radius: 10px;
+  transition: 0.4s ease-in-out;
+  box-shadow: #BBDEFB 1px 2px 2px;
+  border-color: transparent;
+  outline-color: transparent;
+}
+/*
+.card:hover {
+  transform: translateX(-0.05em) translateY(-0.05em);
+  border: 1px solid #BBDEFB;
+  box-shadow: 10px 10px 0px #BBDEFB;
+  border-color: transparent;
+  outline-color: transparent;
+}
+*/
+
+/*Informacion dentro de la card*/
+.bloque_datos {
+  box-sizing: border-box;
+  width: 92%;
+}
+/*Letra dentro de la card*/
+.p_valor {
+  box-sizing: border-box;
+  color: #F8F9FA;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0px;
+}  
+.p_dato {
+  box-sizing: border-box;
+  color: #F8F9FA;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0px;
+}
+/*Iconos de card*/
+.icon_card {
+  color: #F8F9FA;
+}
+/*Contenedor boton de detalles*/
+.contenedor_boton_detalles {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+}
+/*Icono de oton de detalles*/
+.icon_detalles {
+  font-size: 1.8rem;
+}
+.boton_detalles {
+  margin: 0px;
+  border: none;
+  border-radius: 50%;
+  padding: 0.0rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* 🟢 Esta línea hace el fondo transparente */
+}
+.no_registros {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #db2777;
+  grid-column: span 2;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+/*icono cuando no hay registros*/
+.ri-error-warning-line {
+  font-size: 1.8rem;
+  color: #db2777;
+}
+.card_total {
+  display: flex;
+  justify-content: center;
+  height: 5rem;
+  width: 100%;
+  padding: 0rem;
+  margin-bottom: 20px;
+}
+.card_total_hijo {
+  background-color: #6ede8a;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: 0.4s ease-in-out;
+  box-shadow: #b7efc5 1px 2px 2px;
+  border-color: transparent;
+  outline-color: transparent;
+  padding: 0.9rem;
+  box-sizing: border-box;
+}
+.card_total_hijo:hover {
+  transform: translateX(-0.05em) translateY(-0.05em);
+  border: 1px solid #b7efc5;
+  box-shadow: 10px 10px 0px #b7efc5;
+  border-color: transparent;
+  outline-color: transparent;
+}
+.p_total {
+  color: #f8f9fa;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.monto_total {
+  color: #f8f9fa;
+  font-weight: bold;
+  font-size: 1.5rem;
+}

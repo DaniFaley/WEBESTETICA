@@ -1,0 +1,174 @@
+/* Estilos: Vista general de registros de corte*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-color: none;
+  outline-color: none;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Opcional: establece una base de fuente y color */
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+/*Titulo de pagina*/
+.h3_Titulo {
+  box-sizing: border-box;
+  color: #42A5F5;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+/*Iconos de botones*/
+.icon {
+  color: #1E88E5;
+  font-size: 1.3rem;
+}
+.icon--add {
+  color: white;
+}
+/*Letra dentro de la card*/
+.p_valor {
+  box-sizing: border-box;
+  color: #6C757D;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0px;
+} 
+.p_dato {
+  box-sizing: border-box;
+  color: #343A40;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0px;
+}
+.card {
+  background-color: #E3F2FD;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  margin: 0px auto;
+  width: 95%;
+}
+
+.bloque_datos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Botones alineados horizontalmente en móvil */
+.contenedor_botones_detalles {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Botón base */
+.boton_modificar,
+.boton_eliminar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px;
+  color: white;
+  font-size: 1rem;
+}
+
+/* Colores y sombras individuales */
+.boton_modificar {
+  background-color: #2196F3;
+  box-shadow: 0px 5px 0px 0px #1E88E5;
+}
+
+.boton_modificar:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #1E88E5;
+}
+
+.boton_eliminar {
+  background-color: #D32F2F;
+  box-shadow: 0px 5px 0px 0px #B71C1C;
+}
+
+.boton_eliminar:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #B71C1C;
+}
+.ri-close-circle-line {
+  font-size: 1.3rem;
+}
+.contenedor_botones_card {
+  display: flex;
+  justify-content: end;
+}
+.boton_modificar--usuario {
+  width: 3.2rem;
+  height: 2.4rem;
+}
+.no_registros {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #db2777;
+  grid-column: span 2;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+/*icono cuando no hay registros*/
+.ri-error-warning-line {
+  font-size: 1.8rem;
+  color: #db2777;
+}
+/*Boton*/
+.boton_accion {
+  box-sizing: border-box;
+  display: flex;
+  background-color: #90caf9;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #64b5f6;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2rem;
+}
+.boton_accion:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #64b5f6;
+}
+/*Boton agregar registro*/
+.boton_agregar {
+  background-color: #2196F3;
+  box-shadow: 0px 5px 0px 0px #1E88E5;
+}
+.boton_agregar:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #1E88E5;
+}
+.ri-settings-4-line {
+  color: white;
+}
+.contenedor_boton_add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

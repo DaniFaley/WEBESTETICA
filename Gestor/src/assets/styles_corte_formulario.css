@@ -1,0 +1,146 @@
+/* Estilos: Vista agregar un registro, modificar, eliminar*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  border-color: none;
+  outline-color: none;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Opcional: establece una base de fuente y color */
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor_formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* FORMULARIO */
+.formulario {
+  background-color: #E3F2FD;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* TÍTULO */
+.h3_Titulo {
+  text-align: center;
+  font-size: 2rem;
+  color: #1976D2;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* CAMPOS DE ENTRADA */
+.input {
+  margin-bottom: 1.2rem;
+}
+
+.p_input {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.campo_input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.campo_input:focus {
+  border-color: #1976D2;
+  outline: none;
+}
+
+/* MENSAJE DE ÉXITO */
+.mensaje_alerta {
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 6px;
+}
+
+/* ERRORES DE VALIDACIÓN */
+.errorValidacion {
+  color: #D32F2F;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+/* BOTÓN DE ENVÍO */
+.contenedor_boton {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+
+/*Boton*/
+.boton_accion {
+  box-sizing: border-box;
+  display: flex;
+  background-color: #90caf9;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #64b5f6;
+  justify-content: center;
+  align-items: center;
+  width: 3.2rem;
+  height: 2.4rem;
+}
+.boton_accion:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #64b5f6;
+}
+.alert {
+  font-weight: bold;
+  color: #D32F2F;
+}
+.boton_accion--eliminar {
+  background-color: #D32F2F;
+  box-shadow: 0px 5px 0px 0px #B71C1C;
+}
+
+.boton_accion--eliminar:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #B71C1C;
+}
+.boton_accion--editar {
+  background-color: #2196F3;
+  box-shadow: 0px 5px 0px 0px #1E88E5;
+}
+.boton_accion--editar:active {
+  box-shadow: 0px 0px 0px 0px #1E88E5;
+}
+.boton_accion--agregar {
+  background-color: #2196F3;
+  box-shadow: 0px 5px 0px 0px #1E88E5;
+}
+.boton_accion--agregar:active {
+  box-shadow: 0px 0px 0px 0px #1E88E5;
+}
+.icon {
+  font-size: 1.4rem;
+}
