@@ -4,9 +4,10 @@
     <div class="card_total_hijo">
       <strong class="p_total">Total</strong>
       <!--
-      <p class="monto_total">${{ totalMontos}}</p>
-      -->
       <p class="monto_total">${{ totalMontos.toFixed(2) }}</p>
+      -->
+      <p class="monto_total">${{ totalMontos}}</p>
+      
     </div>
   </div>
   <section class="contenedor_section_botones">
@@ -105,7 +106,7 @@ interface Corte {
 
   // Funcion para calcular el total de los montos de los registros del día seleccionado
   const totalMontos = computed(() => {
-    return registrosDelDia.value.reduce((total, registro) => total + parseFloat(registro.monto), 0);
+    return registrosDelDia.value.reduce((total, registro) => total + registro.monto, 0);
   });
 
   // Funcion para dar formato a la fecha

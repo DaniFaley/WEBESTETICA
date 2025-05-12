@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import CorteVue from '@/modules/corte/views/CorteVue.vue'
 import UsuarioVue from '@/modules/Usuario/views/UsuarioVue.vue'
