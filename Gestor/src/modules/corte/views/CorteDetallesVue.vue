@@ -52,6 +52,7 @@
     const formattedDate = typeof date === 'string' ? new Date(date) : date;
     return formattedDate.toLocaleDateString('es-ES');
   };
+  
 
   //----------------------------------------------------------
   //Obtener valores de fk
