@@ -5,7 +5,7 @@ const usuarioApi = axios.create({
 });
 */
 const usuarioApi = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/usuario`
+  baseURL: `https://apiestetica-production-5f1e.up.railway.app/api/usuario`
 });
 
 export default usuarioApi;
