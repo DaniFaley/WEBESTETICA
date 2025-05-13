@@ -39,6 +39,11 @@
               <input type="number" class="form-control campo_input" v-model="cortes[0].monto" disabled />
             </div>
             <div class="input">
+              <p class="p_input">Monto:</p>
+              <input type="date" class="form-control campo_input" v-model="cortes[0].fecha" disabled />
+            </div>
+            <!--
+            <div class="input">
               <p class="p_input">Fecha:</p>
               <input
                 type="date"
@@ -47,6 +52,7 @@
                 disabled
               />
             </div>
+            -->
             <div class="input">
               <p class="p_input">Comentario:</p>
               <input type="text" class="form-control campo_input" v-model="cortes[0].comentario" disabled />
@@ -130,11 +136,13 @@
   });
 
   // Formatear la fecha al formato que acepta el input tipo date (YYYY-MM-DD)
-  const formattedFecha = computed(() => {
+  /*
+    const formattedFecha = computed(() => {
     if (!cortes.value[0]?.fecha) return '';
     const date = new Date(cortes.value[0].fecha);
     return date.toISOString().substring(0, 10); // formato YYYY-MM-DD
   });
+  */
 </script>
 
 <style scoped>

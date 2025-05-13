@@ -84,14 +84,15 @@ let corte = ref<CorteAgregar>({
 const onTodoBien = async () => {
   const corteAEnviar = { ...corte.value };
 
-  // Asegurarse de que la fecha esté en formato YYYY-MM-DD
-  if (corteAEnviar.fecha instanceof Date) {
-    // Convertir la fecha a formato YYYY-MM-DD sin ajustar por zona horaria
-    corteAEnviar.fecha = corteAEnviar.fecha.toISOString().split('T')[0]; // YYYY-MM-DD
+  // Convertir la fecha string a objeto Date y validar
+  const fechaComoDate = new Date(corteAEnviar.fecha);
+  if (!isNaN(fechaComoDate.getTime())) {
+    corteAEnviar.fecha = fechaComoDate.toISOString().split('T')[0]; // Formato YYYY-MM-DD
   }
 
   await agregarCorte(corteAEnviar);
 };
+
 
 // Obtener sexos
 const sexos = ref<{ id_sexo: number; nombre: string }[]>([]);

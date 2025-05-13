@@ -4,7 +4,7 @@ export interface Corte{
     fk_id_sexo: number,
     fk_id_servicio: number,
     monto: number,
-    fecha: string | Date; // ← permite ambos
+    fecha: string; // ← permite ambos
     comentario: string
 }
 //Para insertar: Tendra todo lo de Personal excepto el id.

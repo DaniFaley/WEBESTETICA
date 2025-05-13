@@ -36,7 +36,7 @@
         <p class="p_valor"><i class="ri-account-circle-fill icon_card"></i> <strong class="p_dato">Cliente:</strong> {{ registro.nombre_cliente }}</p>
         <p class="p_valor"><i class="ri-scissors-fill icon_card"></i> <strong class="p_dato">Servicio:</strong> {{ servicios[registro.fk_id_servicio] }}</p>
         <p class="p_valor"><i class="ri-money-dollar-circle-fill icon_card"></i> <strong class="p_dato">Monto:</strong> ${{ registro.monto }}</p>
-        <p class="p_valor"><i class="ri-calendar-fill icon_card"></i> <strong class="p_dato">Fecha:</strong> {{ formatDate(registro.fecha) }}</p>
+        <p class="p_valor"><i class="ri-calendar-fill icon_card"></i> <strong class="p_dato">Fecha:</strong> {{ registro.fecha }}</p>
       </div>
       <div class="contenedor_boton_detalles">
         <RouterLink :to="{ path: '/corte/' + registro.id_corte + '/detalles' }">
@@ -101,10 +101,13 @@ const totalMontos = computed(() => {
 });
 
   // Función para dar formato a la fecha
+  /*
   const formatDate = (date: string | Date) => {
     const formattedDate = typeof date === 'string' ? new Date(date) : date;
     return formattedDate.toLocaleDateString('es-ES');
   };
+  */
+
 
   // Función para ordenar los registros de lo más reciente a lo más antiguo y viceversa
   const alternarOrden = () => {
@@ -187,7 +190,7 @@ const totalMontos = computed(() => {
       const direccion = [usuario.calle || '', usuario.numero_casa || '', usuario.colonia || '', usuario.ciudad || '', usuario.estado || ''].filter(Boolean).join(', ');
 
       const datosEmpresa = [
-        `Fecha: ${formatDate(registrosParaImprimir[0].fecha)}`,
+        `Fecha: ${registrosParaImprimir[0].fecha}`,
         `Nombre: ${nombreCompleto.toLocaleUpperCase()}`,
         `Dirección: ${direccion.toLocaleUpperCase()}`,
         `Código Postal: ${usuario.codigo_postal || ''}`,
@@ -209,7 +212,7 @@ const totalMontos = computed(() => {
         registro.nombre_cliente,
         servicios.value[registro.fk_id_servicio],
         `$${registro.monto}`,
-        formatDate(registro.fecha),
+        registro.fecha
       ]);
 
       autoTable(pdf, {

@@ -43,8 +43,15 @@
 
       <div class="input">
         <p class="p_input">Fecha:</p>
+        <input type="date" class="form-control campo_input" v-model="cortes[0].fecha" />
+      </div>
+
+      <!--
+      <div class="input">
+        <p class="p_input">Fecha:</p>
         <input type="date" class="form-control campo_input" v-model="formattedFecha" />
       </div>
+      -->
 
       <div class="input">
         <p class="p_input">Comentario:</p>
@@ -125,7 +132,8 @@
   });
 
   // Formatear la fecha al formato que acepta el input tipo date (YYYY-MM-DD)
-  const formattedFecha = computed({
+  /*
+    const formattedFecha = computed({
     get: () => {
       if (!cortes.value[0]?.fecha) return ''; // Si no hay fecha, retornamos cadena vacía
       const date = new Date(cortes.value[0].fecha);
@@ -135,6 +143,7 @@
       cortes.value[0].fecha = newDate; // Actualizamos la fecha en cortes[0]
     }
   });
+  */
 </script>
 
 <style scoped>

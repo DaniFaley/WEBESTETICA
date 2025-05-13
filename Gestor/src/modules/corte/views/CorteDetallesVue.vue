@@ -13,7 +13,7 @@
         <p class="p_valor"><i class="ri-group-fill icon"></i> <strong class="p_dato">Sexo:</strong> {{ sexos[corte.fk_id_sexo] || 'Desconocido' }}</p>
         <p class="p_valor"><i class="ri-scissors-fill icon"></i> <strong class="p_dato">Servicio:</strong> {{ servicios[corte.fk_id_servicio] || 'Desconocido' }}</p>
         <p class="p_valor"><i class="ri-money-dollar-circle-fill icon"></i> <strong class="p_dato">Monto:</strong> {{ corte.monto }}</p>
-        <p class="p_valor"><i class="ri-calendar-fill icon"></i> <strong class="p_dato">Fecha:</strong> {{ formatDate(corte.fecha) }}</p>
+        <p class="p_valor"><i class="ri-calendar-fill icon"></i> <strong class="p_dato">Fecha:</strong> {{ corte.fecha }}</p>
         <p class="p_valor"><i class="ri-chat-3-fill icon"></i> <strong class="p_dato">Comentario:</strong> {{ corte.comentario }}</p>
     </div>
 
@@ -46,12 +46,13 @@
     await traeCorteId(idCorte); // Cargar datos del ingreso
   });
   
-
+/*
   // Funcion para dar formato a la fecha
   const formatDate = (date: string | Date) => {
     const formattedDate = typeof date === 'string' ? new Date(date) : date;
     return formattedDate.toLocaleDateString('es-ES');
   };
+*/
   
 
   //----------------------------------------------------------
