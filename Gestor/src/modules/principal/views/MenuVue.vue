@@ -29,10 +29,22 @@
           -->
           <!-- Menú exclusivo para ADMINISTRADOR -->
           <li class="contenedor_menu" v-if="rol === 'administrador'">
+            <a href="/rol" class="nav__link">
+              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Roles</p>
+              </div>
+            </a>
+            <a href="/rol_usuario" class="nav__link">
+              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Usuarios</p>
+              </div>
+            </a>
             <a href="/corte" class="nav__link">
               <i class="ri-grid-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
-                <p class="p_page">Gestion De Cortes</p>
+                <p class="p_page">Registros</p>
               </div>
             </a>
             <a href="/usuario" class="nav__link">
@@ -41,16 +53,16 @@
                 <p class="p_page">Datos Fiscales</p>
               </div>
             </a>
-            <a href="/analisis" class="nav__link">
-              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
-              <div class="contenedor_p">
-                <p class="p_page">Analisis</p>
-              </div>
-            </a>
           </li>
 
           <!-- Menú exclusivo para ANALISTA -->
           <li class="contenedor_menu" v-if="rol === 'analista'">
+            <a href="/corte" class="nav__link">
+              <i class="ri-grid-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Registros</p>
+              </div>
+            </a>
             <a href="/usuario" class="nav__link">
               <i class="ri-article-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
@@ -61,10 +73,10 @@
 
           <!-- Menú exclusivo para REPORTES -->
           <li class="contenedor_menu" v-if="rol === 'reportes'">
-            <a href="/analisis" class="nav__link">
-              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
+            <a href="/usuario" class="nav__link">
+              <i class="ri-article-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
-                <p class="p_page">Analisis</p>
+                <p class="p_page">Datos Fiscales</p>
               </div>
             </a>
           </li>
