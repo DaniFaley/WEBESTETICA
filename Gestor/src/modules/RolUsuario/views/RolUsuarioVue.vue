@@ -90,5 +90,5 @@
 </script>
 
 <style scoped>
-  @import '../../../assets/styles_datos_fiscales.css';
-</style> 
+  @import '../../../assets/styles_registro_corte.css';
+</style>

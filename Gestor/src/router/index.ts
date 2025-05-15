@@ -33,49 +33,49 @@ const router = createRouter({
       path: '/corte',
       name: 'corte',
       component: CorteVue,
-      meta: { rolesPermitidos: ['administrador'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista'] }
     },
     {
       path: '/corte/agregar',
       name: 'corteagregar',
       component: CorteAgregarVue,
-      meta: { rolesPermitidos: ['administrador'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista'] }
     },
     {
       path: '/corte/:id_corte/editar',
       name: 'corteeditar',
       component: CorteEditarVue,
-      meta: { rolesPermitidos: ['administrador'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista'] }
     },
     {
       path: '/corte/:id_corte/eliminar',
       name: 'corteeliminar',
       component: CorteEliminarVue,
-      meta: { rolesPermitidos: ['administrador'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista'] }
     },
     {
       path: '/corte/:id_corte/detalles',
       name: 'cortedetalles',
       component: CorteDetallesVue,
-      meta: { rolesPermitidos: ['administrador'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista'] }
     },
     {
       path: '/usuario',
       name: 'usuario',
       component: UsuarioVue,
-      meta: { rolesPermitidos: ['administrador', 'analista'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista', 'contadora'] }
     },
     {
       path: '/usuario/:id_datos_usuario/editar',
       name: 'usuarioeditar',
       component: UsuarioEditarVue,
-      meta: { rolesPermitidos: ['administrador', 'analista'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista', 'contadora'] }
     },
     {
       path: '/usuario/agregar',
       name: 'usuarioagregar',
       component: UsuarioAgregarVue,
-      meta: { rolesPermitidos: ['administrador', 'analista'] }
+      meta: { rolesPermitidos: ['administrador', 'estilista', 'contadora'] }
     },
     {
       path: '/rol',

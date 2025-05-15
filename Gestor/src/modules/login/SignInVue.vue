@@ -65,13 +65,13 @@ const login = async () => {
     localStorage.setItem('rol', data.rol)
 
     if (data.rol === 'administrador') {
-      router.push('/corte')
+      router.push('/rol')
     } 
-    else if(data.rol === 'analista') {
-      router.push('/usuario')
+    else if(data.rol === 'estilista') {
+      router.push('/corte')
     }
-    else if(data.rol === 'reportes') {
-      router.push('/analisis')
+    else if(data.rol === 'contadora') {
+      router.push('/usuario')
     }
   } catch (err: any) {
     error.value = err.response?.data?.msg || 'Error al iniciar sesión'

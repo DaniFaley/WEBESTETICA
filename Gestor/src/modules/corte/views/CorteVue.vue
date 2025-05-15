@@ -149,95 +149,110 @@ const totalMontos = computed(() => {
   });
 
   //----------------------------------------------------------
-  // Descargar el PDF con diseño de factura
   const descargarPDF = async () => {
-    if (!fechaSeleccionada.value) {
-      alert('Por favor, selecciona una fecha.');
-      return;
-    }
+  if (!fechaSeleccionada.value) {
+    alert('Por favor, selecciona una fecha.');
+    return;
+  }
 
-    const registrosParaImprimir = registrosDelDia.value;
+  const registrosParaImprimir = registrosDelDia.value;
 
-    if (registrosParaImprimir.length === 0) {
-      alert('No hay registros para la fecha seleccionada.');
-      return;
-    }
+  if (registrosParaImprimir.length === 0) {
+    alert('No hay registros para la fecha seleccionada.');
+    return;
+  }
 
-    const usuario = await obtenerUsuario();
-    if (!usuario) {
-      alert('No se pudo obtener la información del usuario.');
-      return;
-    }
+  // Pedir el número de nota al usuario
+  const numeroNota = prompt('Ingresa el número de nota:');
+  if (!numeroNota) {
+    alert('Número de nota es requerido.');
+    return;
+  }
 
-    const pdf = new jsPDF();
+  const usuario = await obtenerUsuario();
+  if (!usuario) {
+    alert('No se pudo obtener la información del usuario.');
+    return;
+  }
 
-    // Cargar logo de empresa desde /public/logo.png
-    const logoImg = new Image();
-    logoImg.src = '/logo_nota.png';
+  const pdf = new jsPDF();
 
-    logoImg.onload = () => {
-      pdf.addImage(logoImg, 'PNG', 10, 10, 40, 20); // x, y, width, height
+  // Cargar logo
+  const logoImg = new Image();
+  logoImg.src = '/logo_nota.png';
 
-      // Título
-      pdf.setFontSize(18);
+  logoImg.onload = () => {
+    pdf.addImage(logoImg, 'PNG', 10, 10, 40, 20); // x, y, width, height
+
+    // Número de nota en la esquina superior derecha
+    pdf.setFontSize(12);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(`No#${numeroNota}`, pdf.internal.pageSize.width - 10, 10, { align: "right" });
+
+    // Título centrado
+    pdf.setFontSize(18);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("Nota De Venta", pdf.internal.pageSize.width / 2, 20, { align: "center" });
+
+    // Datos del negocio
+    pdf.setFontSize(10);
+    pdf.setFont("helvetica", "normal");
+    const nombreCompleto = [usuario.primer_nombre, usuario.segundo_nombre || '', usuario.primer_apellido, usuario.segundo_apellido || ''].filter(Boolean).join(' ');
+    const direccion = [usuario.calle || '', usuario.numero_casa || '', usuario.colonia || '', usuario.ciudad || '', usuario.estado || ''].filter(Boolean).join(', ');
+
+    const datosEmpresa = [
+      `Fecha: ${registrosParaImprimir[0].fecha}`,
+      `Nombre: ${nombreCompleto.toUpperCase()}`,
+      `Dirección: ${direccion.toUpperCase()}`,
+      `Código Postal: ${usuario.codigo_postal || ''}`,
+      `RFC: ${usuario.rfc?.toUpperCase() || ''}`,
+      `CURP: ${usuario.curp?.toUpperCase() || ''}`,
+      `Teléfono: ${usuario.telefono || ''}`
+    ];
+
+    let y = 35;
+    datosEmpresa.forEach((linea) => {
       pdf.setFont("helvetica", "bold");
-      pdf.text("Nota De Venta", pdf.internal.pageSize.width / 2, 20, { align: "center" });
+      pdf.text(linea, 10, y);
+      y += 5;
+    });
 
-      // Datos del negocio
-      pdf.setFontSize(10);
-      pdf.setFont("helvetica", "normal");
-      const nombreCompleto = [usuario.primer_nombre, usuario.segundo_nombre || '', usuario.primer_apellido, usuario.segundo_apellido || ''].filter(Boolean).join(' ');
-      const direccion = [usuario.calle || '', usuario.numero_casa || '', usuario.colonia || '', usuario.ciudad || '', usuario.estado || ''].filter(Boolean).join(', ');
+    // Tabla
+    const columns = ['Cliente', 'Servicio', 'Monto', 'Fecha'];
+    const rows = registrosParaImprimir.map((registro) => [
+      registro.nombre_cliente,
+      servicios.value[registro.fk_id_servicio],
+      `$${registro.monto}`,
+      registro.fecha
+    ]);
 
-      const datosEmpresa = [
-        `Fecha: ${registrosParaImprimir[0].fecha}`,
-        `Nombre: ${nombreCompleto.toLocaleUpperCase()}`,
-        `Dirección: ${direccion.toLocaleUpperCase()}`,
-        `Código Postal: ${usuario.codigo_postal || ''}`,
-        `RFC: ${usuario.rfc.toLocaleUpperCase() || ''}`,
-        `CURP: ${usuario.curp.toLocaleUpperCase() || ''}`,
-        `Teléfono: ${usuario.telefono || ''}`
-      ];
+    autoTable(pdf, {
+      head: [columns],
+      body: rows,
+      startY: y + 5,
+      theme: 'grid',
+      headStyles: { fillColor: [0, 102, 204] },
+      styles: {
+        font: "helvetica",
+        fontSize: 9,
+        cellPadding: 3
+      }
+    });
 
-      let y = 35;
-      datosEmpresa.forEach((linea) => {
-        pdf.setFont("helvetica", "bold");
-        pdf.text(linea, 10, y);
-        y += 5;
-      });
+    // Total en parte inferior derecha
+    // Total en parte inferior derecha, debajo de la tabla
+    const total = totalMontos.value;
+    const finalY = (pdf as any).lastAutoTable.finalY || y + 10; // Fallback en caso de error
+    pdf.setFontSize(12);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(`Total = $${total.toFixed(2)}`, pdf.internal.pageSize.width - 15, finalY + 10, { align: "right" });
 
-      // Tabla de registros
-      const columns = ['Cliente', 'Servicio', 'Monto', 'Fecha'];
-      const rows = registrosParaImprimir.map((registro) => [
-        registro.nombre_cliente,
-        servicios.value[registro.fk_id_servicio],
-        `$${registro.monto}`,
-        registro.fecha
-      ]);
 
-      autoTable(pdf, {
-        head: [columns],
-        body: rows,
-        startY: y + 5,
-        theme: 'grid',
-        headStyles: { fillColor: [0, 102, 204] },
-        styles: {
-          font: "helvetica",
-          fontSize: 9,
-          cellPadding: 3
-        }
-      });
-
-      // Total
-      const total = totalMontos.value;
-      pdf.setFontSize(12);
-      pdf.setFont("helvetica", "bold");
-      pdf.text(`Total = $${total.toFixed(2)}`, pdf.internal.pageSize.width - 15,  10, { align: "right" });
-
-      // Guardar archivo
-      pdf.save(`factura-${fechaSeleccionada.value}.pdf`);
-    };
+    // Guardar PDF
+    pdf.save(`nota-${numeroNota}.pdf`);
   };
+};
+
 </script>
 
 <style scoped>

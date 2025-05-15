@@ -55,8 +55,8 @@
             </a>
           </li>
 
-          <!-- Menú exclusivo para ANALISTA -->
-          <li class="contenedor_menu" v-if="rol === 'analista'">
+          <!-- Menú exclusivo para Estilista -->
+          <li class="contenedor_menu" v-if="rol === 'estilista'">
             <a href="/corte" class="nav__link">
               <i class="ri-grid-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
@@ -71,8 +71,8 @@
             </a>
           </li>
 
-          <!-- Menú exclusivo para REPORTES -->
-          <li class="contenedor_menu" v-if="rol === 'reportes'">
+          <!-- Menú exclusivo para Contadora -->
+          <li class="contenedor_menu" v-if="rol === 'contadora'">
             <a href="/usuario" class="nav__link">
               <i class="ri-article-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
@@ -112,7 +112,7 @@ onMounted(() => {
 
 function cerrarSesion() {
   localStorage.removeItem('token') // Elimina el token
-  router.push('/signin') // Redirige al login
+  router.push('/inicio') // Redirige al login
 }
 
 //Menus difrtes para cada rol

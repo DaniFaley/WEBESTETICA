@@ -45,15 +45,6 @@
     const idCorte = Number(route.params.id_corte);
     await traeCorteId(idCorte); // Cargar datos del ingreso
   });
-  
-/*
-  // Funcion para dar formato a la fecha
-  const formatDate = (date: string | Date) => {
-    const formattedDate = typeof date === 'string' ? new Date(date) : date;
-    return formattedDate.toLocaleDateString('es-ES');
-  };
-*/
-  
 
   //----------------------------------------------------------
   //Obtener valores de fk
@@ -84,17 +75,6 @@
     } 
     catch (error) {
       console.error("Error al obtener los servicios:", error);
-    }
-  };
-    
-  // Obtener el único usuario registrado
-  const obtenerUsuario = async () => {
-    try {
-      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/usuario/`);
-      return response.data[0]; // asumimos que hay un solo usuario
-    } catch (error) {
-      console.error("Error al obtener el usuario:", error);
-      return null;
     }
   };
 
