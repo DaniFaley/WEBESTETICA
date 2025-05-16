@@ -5,7 +5,7 @@
         <h3 class="h3_Titulo">Agregar Usuario</h3>
   
         <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert">
-          Usuario agregado exitosamente
+          Registro agregado exitosamente
         </div>
 
         <div class="input">
@@ -84,12 +84,11 @@
 
 
 <script setup lang="ts">
-  import { ref, onMounted, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import type { UsuarioAgregar } from '../interfaces/usuario-interfaces';
   import { useUsuario } from '../controllers/useUsuario';
   import { Field, Form, ErrorMessage } from 'vee-validate';
   import { useRouter } from 'vue-router';
-  import axios from 'axios';
 
   const { agregarUsuario, mensaje } = useUsuario();
   const routeRedirect = useRouter();

@@ -1,5 +1,5 @@
 <template>
-    <div class="contenedor_formulario" v-if="rols[0]">
+    <div class="contenedor_formulario" v-if="roles[0]">
           <div class="formulario">
 
             <h3 class="h3_Titulo">Eliminar Registro</h3>
@@ -7,17 +7,17 @@
             <div class="alert alert-warning mensaje_alerta" role="alert">
               <i class="ri-error-warning-line"></i> ¿Estas seguro que deseas eliminar el registro? <i class="ri-error-warning-line"></i>
             </div>
-
             <div class="input">
               <p class="p_input">ID:</p>
-              <input type="number" class="form-control campo_input" v-model="rols[0].id_rol" disabled />
+              <input type="number" class="form-control campo_input" v-model="roles[0].id_rol" disabled />
             </div>
             <div class="input">
               <p class="p_input">Nombre:</p>
-              <input type="text" class="form-control campo_input" v-model="rols[0].nombre" disabled />
+              <input type="text" class="form-control campo_input" v-model="roles[0].nombre" disabled />
             </div>
+
             <div class="contenedor_boton">
-              <button class="btn btn-danger boton_accion boton_accion--eliminar" @click="borrarRol(rols[0])">
+              <button class="btn btn-danger boton_accion boton_accion--eliminar" @click="borrarRol(roles[0])">
                 <i class="ri-delete-bin-5-fill icon"></i>
               </button>
             </div>
@@ -26,12 +26,11 @@
   </template>
   
 <script setup lang="ts">
-  import { ref, onMounted, computed, watch } from 'vue';
+  import { onMounted, computed, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { useRol } from '../controllers/useRol';
-  import axios from 'axios';
 
-  const { traeRolId, borrarRol, mensaje, rols } = useRol();
+  const { traeRolId, borrarRol, mensaje, roles } = useRol();
 
   // Traer los datos del registro de cada id
   let idRol = 0;

@@ -4,7 +4,7 @@
       <h3 class="h3_Titulo">Agregar Usuario</h3>
 
       <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert">
-        Usuario agregado exitosamente
+        Registro agregado exitosamente
       </div>
 
       <div class="input">
@@ -12,17 +12,15 @@
         <Field name="correo" type="text" class="form-control campo_input" v-model="rol_usuario.correo" />
         <ErrorMessage name="correo" class="errorValidacion" />
       </div>
-
       <div class="input">
         <p class="p_input">Contraseña:</p>
         <Field name="contrasena" type="text" class="form-control campo_input" v-model="rol_usuario.contrasena" />
         <ErrorMessage name="contrasena" class="errorValidacion" />
       </div>
-
       <div class="input">
         <p class="p_input">Rol:</p>
         <select name="fk_id_rol" class="form-control campo_input" v-model="rol_usuario.fk_id_rol">
-          <option v-for="rol in rols" :key="rol.id_rol" :value="rol.id_rol">
+          <option v-for="rol in roles" :key="rol.id_rol" :value="rol.id_rol">
             {{ rol.nombre }}
           </option>
         </select>
@@ -39,25 +37,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import type { RolUsuarioAgregar } from '../interfaces/rol_usuario-interfaces';
-import { useRolUsuario } from '../controllers/rol_usuarioRol';
-import { Field, Form, ErrorMessage } from 'vee-validate';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
+  import { ref, onMounted, watch } from 'vue';
+  import type { RolUsuarioAgregar } from '../interfaces/rol_usuario-interfaces';
+  import { useRolUsuario } from '../controllers/rol_usuarioRol';
+  import { Field, Form, ErrorMessage } from 'vee-validate';
+  import { useRouter } from 'vue-router';
+    // Importa las funciones reutilizables desde getfk.ts
+  import { fetchRol } from '../utils/getFK';
 
-const { agregarRolUsuario, mensaje } = useRolUsuario();
-const routeRedirect = useRouter();
+  const { agregarRolUsuario, mensaje } = useRolUsuario();
+  const routeRedirect = useRouter();
 
-let rol_usuario = ref<RolUsuarioAgregar>({
-  correo: '',
-  contrasena: '',
-  fk_id_rol: 0
-});
+  let rol_usuario = ref<RolUsuarioAgregar>({
+    correo: '',
+    contrasena: '',
+    fk_id_rol: 0
+  });
 
-// Función para manejar el envío del formulario
+  // Obtener valores de la fk
+  const roles = ref<{ id_rol: number; nombre: string }[]>([]);
+
+  // Cargar datos
+  onMounted(async () => {
+    roles.value = await fetchRol();
+
+  });
+
+  // Función para manejar el envío del formulario
   const onTodoBien = async () => {
-      await agregarRolUsuario(rol_usuario.value);
+    await agregarRolUsuario(rol_usuario.value);
   };
 
   watch(
@@ -70,22 +78,6 @@ let rol_usuario = ref<RolUsuarioAgregar>({
           }
       }
   );
-  // Variables para las sexos
-  const rols = ref<{ id_rol: number; nombre: string }[]>([]);
-
-  // Función para obtener sexos del backend
-  const fetchRol = async () => {
-    try {
-      const response = await axios.get(`https://apiestetica-production-5f1e.up.railway.app/api/rol/`);
-      rols.value = response.data;
-    } catch (error) {
-      console.error('Error al obtener las sexos:', error);
-    }
-  };
-
-  onMounted(async () => {
-    await fetchRol(); 
-  });
 </script>
 
 <style scoped>

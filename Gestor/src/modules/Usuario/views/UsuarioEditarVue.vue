@@ -5,7 +5,7 @@
         <h3 class="h3_Titulo">Modificar Registro</h3>
   
         <div v-if="mensaje === 1" class="alert alert-success mensaje_alerta" role="alert">
-          usuario modificado exitosamente
+          Registro modificado exitosamente
         </div>
   
         <div class="input">

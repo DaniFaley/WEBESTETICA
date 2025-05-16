@@ -57,16 +57,16 @@
     });
 
     function obtenerNombreCompleto(usuario: any): string {
-  return [
-    usuario.primer_nombre,
-    usuario.segundo_nombre,
-    usuario.primer_apellido,
-    usuario.segundo_apellido
-  ]
-    .map(n => n?.trim()) // aseguramos que no falle si alguno es null/undefined
-    .filter(n => n) // eliminamos vacíos si alguno está en blanco
-    .join(' ');
-}
+        return [
+            usuario.primer_nombre,
+            usuario.segundo_nombre,
+            usuario.primer_apellido,
+            usuario.segundo_apellido
+        ]
+            .map(n => n?.trim()) // aseguramos que no falle si alguno es null/undefined
+            .filter(n => n) // eliminamos vacíos si alguno está en blanco
+            .join(' ');
+    }
 </script>
 
 <style scoped>

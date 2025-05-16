@@ -1,12 +1,13 @@
 <template>
   <h3 class="h3_Titulo">Registros</h3>
+  
   <div class="card_total">
     <div class="card_total_hijo">
       <strong class="p_total">Total</strong>
       <p class="monto_total">${{ totalMontos.toFixed(2) }}</p>
-
     </div>
   </div>
+
   <section class="contenedor_section_botones">
     <div class="contenedor_boton_hijo">
       <div class="contenedor_boton_add">
@@ -59,9 +60,8 @@
 <script setup lang="ts">
   import { ref, computed, onMounted } from 'vue';
   import { useCorte } from '../controllers/useCorte';
-  import jsPDF from 'jspdf';
-  import autoTable from 'jspdf-autotable';
-  import axios from 'axios';
+  import { getServicio, obtenerUsuario } from '../utils/getFK';
+  import { generarPDF } from '../utils/pdf';
 
   const { traeCorte, cortes } = useCorte();
   const fechaSeleccionada = ref('');
@@ -92,167 +92,46 @@
     });
   });
 
-const totalMontos = computed(() => {
-  return registrosDelDia.value.reduce((total, registro) => {
-    // Asegurarnos de que el monto sea un número
-    const monto = parseFloat(registro.monto.toString());
-    return total + monto;
-  }, 0);
-});
-
-  // Función para dar formato a la fecha
-  /*
-  const formatDate = (date: string | Date) => {
-    const formattedDate = typeof date === 'string' ? new Date(date) : date;
-    return formattedDate.toLocaleDateString('es-ES');
-  };
-  */
-
+  // Obtener la suma total de los montos
+  const totalMontos = computed(() => {
+    return registrosDelDia.value.reduce((total, registro) => {
+      // Asegurarnos de que el monto sea un número
+      const monto = parseFloat(registro.monto.toString());
+      return total + monto;
+    }, 0);
+  });
 
   // Función para ordenar los registros de lo más reciente a lo más antiguo y viceversa
   const alternarOrden = () => {
     ordenDescendente.value = !ordenDescendente.value;
   };
 
-  //----------------------------------------------------------
-  // Obtener valores de fk
-  // Para mostrar nombre de servicio
+  // Obtener valor de la fk de servicio
   const servicios = ref<Record<number, string>>({});
+  // Obtener los datos del usuario para el pdf
+  const usuario = ref<any | null>(null);
 
-  // Obtener servicios
-  const obtenerServicio = async () => {
-    try {
-      const response = await axios.get('https://apiestetica-production-5f1e.up.railway.app/api/servicio/');
-      response.data.forEach((servicio: any) => {
-        servicios.value[servicio.id_servicio] = servicio.nombre;
-      });
-    } catch (error) {
-      console.error('Error al obtener los servicios:', error);
-    }
-  };
-
-  // Obtener el único usuario registrado
-  const obtenerUsuario = async () => {
-    try {
-      const response = await axios.get('https://apiestetica-production-5f1e.up.railway.app/api/usuario/');
-      return response.data[0]; // asumimos que hay un solo usuario
-    } catch (error) {
-      console.error('Error al obtener el usuario:', error);
-      return null;
-    }
-  };
-
-  // Cargar cortes y datos de catálogos
   onMounted(async () => {
+    usuario.value = await obtenerUsuario();
+    console.log('Usuario obtenido:', usuario.value);
+
     await traeCorte();
-    await obtenerServicio();
+    servicios.value = await getServicio();
   });
 
-  //----------------------------------------------------------
-  const descargarPDF = async () => {
-  if (!fechaSeleccionada.value) {
-    alert('Por favor, selecciona una fecha.');
-    return;
-  }
 
-  const registrosParaImprimir = registrosDelDia.value;
-
-  if (registrosParaImprimir.length === 0) {
-    alert('No hay registros para la fecha seleccionada.');
-    return;
-  }
-
-  // Pedir el número de nota al usuario
-  const numeroNota = prompt('Ingresa el número de nota:');
-  if (!numeroNota) {
-    alert('Número de nota es requerido.');
-    return;
-  }
-
-  const usuario = await obtenerUsuario();
-  if (!usuario) {
-    alert('No se pudo obtener la información del usuario.');
-    return;
-  }
-
-  const pdf = new jsPDF();
-
-  // Cargar logo
-  const logoImg = new Image();
-  logoImg.src = '/logo_nota.png';
-
-  logoImg.onload = () => {
-    pdf.addImage(logoImg, 'PNG', 10, 10, 40, 20); // x, y, width, height
-
-    // Número de nota en la esquina superior derecha
-    pdf.setFontSize(12);
-    pdf.setFont("helvetica", "bold");
-    pdf.text(`No#${numeroNota}`, pdf.internal.pageSize.width - 10, 10, { align: "right" });
-
-    // Título centrado
-    pdf.setFontSize(18);
-    pdf.setFont("helvetica", "bold");
-    pdf.text("Nota De Venta", pdf.internal.pageSize.width / 2, 20, { align: "center" });
-
-    // Datos del negocio
-    pdf.setFontSize(10);
-    pdf.setFont("helvetica", "normal");
-    const nombreCompleto = [usuario.primer_nombre, usuario.segundo_nombre || '', usuario.primer_apellido, usuario.segundo_apellido || ''].filter(Boolean).join(' ');
-    const direccion = [usuario.calle || '', usuario.numero_casa || '', usuario.colonia || '', usuario.ciudad || '', usuario.estado || ''].filter(Boolean).join(', ');
-
-    const datosEmpresa = [
-      `Fecha: ${registrosParaImprimir[0].fecha}`,
-      `Nombre: ${nombreCompleto.toUpperCase()}`,
-      `Dirección: ${direccion.toUpperCase()}`,
-      `Código Postal: ${usuario.codigo_postal || ''}`,
-      `RFC: ${usuario.rfc?.toUpperCase() || ''}`,
-      `CURP: ${usuario.curp?.toUpperCase() || ''}`,
-      `Teléfono: ${usuario.telefono || ''}`
-    ];
-
-    let y = 35;
-    datosEmpresa.forEach((linea) => {
-      pdf.setFont("helvetica", "bold");
-      pdf.text(linea, 10, y);
-      y += 5;
-    });
-
-    // Tabla
-    const columns = ['Cliente', 'Servicio', 'Monto', 'Fecha'];
-    const rows = registrosParaImprimir.map((registro) => [
-      registro.nombre_cliente,
-      servicios.value[registro.fk_id_servicio],
-      `$${registro.monto}`,
-      registro.fecha
-    ]);
-
-    autoTable(pdf, {
-      head: [columns],
-      body: rows,
-      startY: y + 5,
-      theme: 'grid',
-      headStyles: { fillColor: [0, 102, 204] },
-      styles: {
-        font: "helvetica",
-        fontSize: 9,
-        cellPadding: 3
-      }
-    });
-
-    // Total en parte inferior derecha
-    // Total en parte inferior derecha, debajo de la tabla
-    const total = totalMontos.value;
-    const finalY = (pdf as any).lastAutoTable.finalY || y + 10; // Fallback en caso de error
-    pdf.setFontSize(12);
-    pdf.setFont("helvetica", "bold");
-    pdf.text(`Total = $${total.toFixed(2)}`, pdf.internal.pageSize.width - 15, finalY + 10, { align: "right" });
-
-
-    // Guardar PDF
-    pdf.save(`nota-${numeroNota}.pdf`);
+  // PDF
+  const descargarPDF = () => {
+    if (!fechaSeleccionada.value) {
+      alert('Por favor, selecciona una fecha.');
+      return;
+    }
+    if (registrosDelDia.value.length === 0) {
+      alert('No hay registros para la fecha seleccionada.');
+      return;
+    }
+    generarPDF(registrosDelDia.value, servicios.value, totalMontos.value);
   };
-};
-
 </script>
 
 <style scoped>

@@ -161,7 +161,6 @@ html, body {
   font-weight: bold;
   font-size: 1rem;
   margin: 0px;
-  background-color: #1976D2; /* Fondo azul */
   padding: 1px 5px; /* Espaciado alrededor del texto para hacer el fondo visible */
   border-radius: 4px; /* Opcional: bordes redondeados para el fondo */
 }

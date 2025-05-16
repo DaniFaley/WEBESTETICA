@@ -4,7 +4,7 @@
       <h3 class="h3_Titulo">Agregar Rol</h3>
 
       <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert">
-        Rol agregado exitosamente
+        Registro agregado exitosamente
       </div>
 
       <div class="input">
@@ -23,12 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, watch } from 'vue';
 import type { RolAgregar } from '../interfaces/rol-interfaces';
 import { useRol } from '../controllers/useRol';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 
 const { agregarRol, mensaje } = useRol();
 const routeRedirect = useRouter();
