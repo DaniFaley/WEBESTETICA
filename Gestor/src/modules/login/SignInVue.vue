@@ -65,7 +65,7 @@ const login = async () => {
     localStorage.setItem('rol', data.rol)
 
     if (data.rol === 'administrador') {
-      router.push('/rol')
+      router.push('/rol_usuario')
     } 
     else if(data.rol === 'estilista') {
       router.push('/corte')

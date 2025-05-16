@@ -5,11 +5,11 @@
     <div v-for="(rol_usuario, index) in roles_usuario" :key="index" class="card">
       <div class="bloque_datos">
           <p class="p_valor">
-            <i class="ri-id-card-fill icon"></i> 
+            <i class="ri-mail-fill icon"></i> 
             <strong class="p_dato">Correo:</strong> {{ rol_usuario.correo }}
           </p>
           <p class="p_valor">
-            <i class="ri-id-card-fill icon"></i> 
+            <i class="ri-account-circle-fill icon"></i> 
             <strong class="p_dato">Rol:</strong> {{ roles[rol_usuario.fk_id_rol]}}
           </p>
       </div>

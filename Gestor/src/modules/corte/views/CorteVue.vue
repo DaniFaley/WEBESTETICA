@@ -32,22 +32,20 @@
 
   <!-- Mostrar los registros si hay -->
   <section class="contenedor_section_tabla" v-if="registrosDelDia.length > 0">
-    <div v-for="(registro, index) in registrosDelDia" :key="index" class="card">
-      <div class="bloque_datos">
-        <p class="p_valor"><i class="ri-account-circle-fill icon_card"></i> <strong class="p_dato">Cliente:</strong> {{ registro.nombre_cliente }}</p>
-        <p class="p_valor"><i class="ri-scissors-fill icon_card"></i> <strong class="p_dato">Servicio:</strong> {{ servicios[registro.fk_id_servicio] }}</p>
-        <p class="p_valor"><i class="ri-money-dollar-circle-fill icon_card"></i> <strong class="p_dato">Monto:</strong> ${{ registro.monto }}</p>
-        <p class="p_valor"><i class="ri-calendar-fill icon_card"></i> <strong class="p_dato">Fecha:</strong> {{ registro.fecha }}</p>
-      </div>
-      <div class="contenedor_boton_detalles">
-        <RouterLink :to="{ path: '/corte/' + registro.id_corte + '/detalles' }">
-          <button type="button" class="boton_detalles">
-            <i class="ri-expand-diagonal-fill icon icon_detalles"></i>
+      <div v-for="(registro, index) in registrosDelDia" :key="index" class="card">
+        <RouterLink class="contenedor_router" :to="{ path: '/corte/' + registro.id_corte + '/detalles' }">
+          <button type="button" class="boton_card">
+            <div class="bloque_datos">
+              <p class="p_valor"><i class="ri-account-circle-fill icon_card"></i> <strong class="p_dato">Cliente:</strong> {{ registro.nombre_cliente }}</p>
+              <p class="p_valor"><i class="ri-scissors-fill icon_card"></i> <strong class="p_dato">Servicio:</strong> {{ servicios[registro.fk_id_servicio] }}</p>
+              <p class="p_valor"><i class="ri-money-dollar-circle-fill icon_card"></i> <strong class="p_dato">Monto:</strong> ${{ registro.monto }}</p>
+              <p class="p_valor"><i class="ri-calendar-fill icon_card"></i> <strong class="p_dato">Fecha:</strong> {{ registro.fecha }}</p>
+            </div>
           </button>
         </RouterLink>
       </div>
-    </div>
-  </section>
+    </section>
+
 
   <!-- Mostrar mensaje si no hay registros -->
   <section class="contenedor_section_tabla" v-else>
@@ -135,5 +133,5 @@
 </script>
 
 <style scoped>
-  @import '../../../assets/styles_registro_corte.css';
-</style>
+  @import '../../../assets/styles_new.css';
+</style> 

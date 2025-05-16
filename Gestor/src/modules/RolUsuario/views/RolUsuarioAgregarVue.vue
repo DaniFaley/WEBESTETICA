@@ -14,7 +14,7 @@
       </div>
       <div class="input">
         <p class="p_input">Contraseña:</p>
-        <Field name="contrasena" type="text" class="form-control campo_input" v-model="rol_usuario.contrasena" />
+        <Field name="contrasena" type="password" class="form-control campo_input" v-model="rol_usuario.contrasena" />
         <ErrorMessage name="contrasena" class="errorValidacion" />
       </div>
       <div class="input">
@@ -42,6 +42,7 @@
   import { useRolUsuario } from '../controllers/rol_usuarioRol';
   import { Field, Form, ErrorMessage } from 'vee-validate';
   import { useRouter } from 'vue-router';
+  import bcrypt from 'bcryptjs';
     // Importa las funciones reutilizables desde getfk.ts
   import { fetchRol } from '../utils/getFK';
 
@@ -65,8 +66,16 @@
 
   // Función para manejar el envío del formulario
   const onTodoBien = async () => {
-    await agregarRolUsuario(rol_usuario.value);
-  };
+  // Clonamos el objeto original para no modificar el ref directamente
+  const usuarioAEnviar = { ...rol_usuario.value };
+
+  // Encriptar la contraseña con bcrypt
+  const salt = bcrypt.genSaltSync(10); // puedes ajustar el número de rondas si lo deseas
+  usuarioAEnviar.contrasena = bcrypt.hashSync(usuarioAEnviar.contrasena, salt);
+
+  // Enviar los datos ya encriptados
+  await agregarRolUsuario(usuarioAEnviar);
+};
 
   watch(
       () => mensaje.value,
@@ -81,5 +90,5 @@
 </script>
 
 <style scoped>
-@import '../../../assets/styles_corte_formulario.css';
+  @import '../../../assets/styles_corte_formulario.css';
 </style>
