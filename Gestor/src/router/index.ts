@@ -20,6 +20,7 @@ import RolUsuarioAgregarVue from '@/modules/RolUsuario/views/RolUsuarioAgregarVu
 import RolUsuarioEditarVue from '@/modules/RolUsuario/views/RolUsuarioEditarVue.vue'
 import RolUsuarioEliminarVue from '@/modules/RolUsuario/views/RolUsuarioEliminarVue.vue'
 import RolUsuarioDetallesVue from '@/modules/RolUsuario/views/RolUsuarioDetallesVue.vue'
+import TablaVue from '@/modules/corte/views/TablaVue.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -140,6 +141,12 @@ const router = createRouter({
       name: 'rol_usuariodetalles',
       component: RolUsuarioDetallesVue,
       meta: { rolesPermitidos: ['administrador'] }
+    },
+    {
+      path: '/tabla',
+      name: 'tabla',
+      component: TablaVue,
+      meta: { rolesPermitidos: ['administrador', 'estilista', 'contadora'] }
     },
     {
       path: '/inicio',

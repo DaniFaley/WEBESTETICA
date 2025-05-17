@@ -17,15 +17,12 @@
         </div>
     </section>
 
-    
-
-
     <section class="contenedor_section_tabla">
       <div v-for="(usuario, index) in usuarios" :key="index" class="card">
         <RouterLink class="contenedor_router" :to="{ path: '/usuario/' + usuario.id_datos_usuario + '/editar' }">
           <button type="button" class="boton_card">
             <div class="bloque_datos">
-              <p class="p_valor"><i class="ri-account-circle-fill p_icon"></i> Nombre: <strong class="p_dato">{{ obtenerNombreCompleto(usuario) }}</strong></p>
+                <p class="p_valor"><i class="ri-id-card-fill p_icon"></i> Nombre: <strong class="p_dato">{{ obtenerNombreCompleto(usuario) }}</strong></p>
                 <p class="p_valor"><i class="ri-id-card-fill p_icon"></i> CURP: <strong class="p_dato">{{ usuario.curp }}</strong></p>
                 <p class="p_valor"><i class="ri-id-card-fill p_icon"></i> RFC: <strong class="p_dato">{{ usuario.rfc }}</strong></p>
                 <p class="p_valor"><i class="ri-home-2-fill p_icon"></i> Calle: <strong class="p_dato">{{ usuario.calle }}</strong></p>

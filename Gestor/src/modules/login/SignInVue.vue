@@ -71,7 +71,7 @@ const login = async () => {
       router.push('/corte')
     }
     else if(data.rol === 'contadora') {
-      router.push('/usuario')
+      router.push('/tabla')
     }
   } catch (err: any) {
     error.value = err.response?.data?.msg || 'Error al iniciar sesión'

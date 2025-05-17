@@ -27,7 +27,7 @@ html, body {
   font-weight: bold;
   text-align: center;
   font-size: 2.4rem;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 /*Contenedor de cards (Registros)*/
@@ -139,19 +139,16 @@ html, body {
   align-items: center;
   width: 3rem;
   height: 2rem;
+  color: #f8f9fa;
+  font-weight: bold;
+  text-align: center;
 }
-.boton_accion:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #64b5f6;
+
+.boton_accion_ano {
+width: 23rem;
 }
-/*Boton agregar registro*/
-.boton_agregar {
-  background-color: #2196F3;
-  box-shadow: 0px 5px 0px 0px #1E88E5;
-}
-.boton_agregar:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #1E88E5;
+.boton_accion_mes {
+width: 23rem;
 }
 .icon {
   color: #f8f9fa;
@@ -203,37 +200,22 @@ html, body {
 
 
 
-/*Boton*/
-.boton_accion {
-  box-sizing: border-box;
-  display: flex;
-  background-color: #90caf9;
-  border-radius: 5px;
-  transition: all ease 0.1s;
-  box-shadow: 0px 5px 0px 0px #64b5f6;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 2rem;
-}
-.boton_accion:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #64b5f6;
-}
-/*Boton agregar registro*/
-.boton_agregar {
-  background-color: #2196F3;
-  box-shadow: 0px 5px 0px 0px #1E88E5;
-}
-.boton_agregar:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #1E88E5;
-}
+
 
 .contenedor_boton_filtros {
   display: flex;
   gap: 10px;
-
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
+.contenedor_orden {
+  width: 100%;
+  justify-self: end;
+}
+.boton_orden {
+  justify-self: end;
+  
 }
 .boton_fecha {
   font-size: 14px;

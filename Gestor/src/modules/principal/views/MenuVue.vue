@@ -29,30 +29,36 @@
           -->
           <!-- Menú exclusivo para ADMINISTRADOR -->
           <li class="contenedor_menu" v-if="rol === 'administrador'">
-            <a href="/rol" class="nav__link">
-              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
-              <div class="contenedor_p">
-                <p class="p_page">Roles</p>
-              </div>
-            </a>
-            <a href="/rol_usuario" class="nav__link">
-              <i class="ri-pie-chart-fill logo_menu_opciones"></i>
-              <div class="contenedor_p">
-                <p class="p_page">Usuarios</p>
-              </div>
-            </a>
             <a href="/corte" class="nav__link">
               <i class="ri-grid-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
                 <p class="p_page">Registros</p>
               </div>
             </a>
-            <a href="/usuario" class="nav__link">
+            <a href="/tabla" class="nav__link">
               <i class="ri-article-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Facturas</p>
+              </div>
+            </a>
+            <a href="/usuario" class="nav__link">
+              <i class="ri-id-card-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
                 <p class="p_page">Datos Fiscales</p>
               </div>
             </a>
+            <a href="/rol" class="nav__link">
+              <i class="ri-account-circle-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Roles</p>
+              </div>
+            </a>
+            <a href="/rol_usuario" class="nav__link">
+              <i class="ri-user-add-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Usuarios</p>
+              </div>
+            </a>      
           </li>
 
           <!-- Menú exclusivo para Estilista -->
@@ -63,8 +69,14 @@
                 <p class="p_page">Registros</p>
               </div>
             </a>
-            <a href="/usuario" class="nav__link">
+            <a href="/tabla" class="nav__link">
               <i class="ri-article-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Facturas</p>
+              </div>
+            </a>
+            <a href="/usuario" class="nav__link">
+              <i class="ri-id-card-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
                 <p class="p_page">Datos Fiscales</p>
               </div>
@@ -73,8 +85,14 @@
 
           <!-- Menú exclusivo para Contadora -->
           <li class="contenedor_menu" v-if="rol === 'contadora'">
-            <a href="/usuario" class="nav__link">
+            <a href="/tabla" class="nav__link">
               <i class="ri-article-fill logo_menu_opciones"></i>
+              <div class="contenedor_p">
+                <p class="p_page">Facturas</p>
+              </div>
+            </a>
+            <a href="/usuario" class="nav__link">
+              <i class="ri-id-card-fill logo_menu_opciones"></i>
               <div class="contenedor_p">
                 <p class="p_page">Datos Fiscales</p>
               </div>
